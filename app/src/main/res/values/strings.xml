@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Imobiliario</string>
+    <string name="app_etapa_cadastro">Cadastrar Imovel</string>
+    <string name="endere_o">Endereço</string>
+    <string name="proprietario">Proprietario</string>
+    <string name="valor">Valor</string>
+    <string name="informa_oes">Informaçoes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

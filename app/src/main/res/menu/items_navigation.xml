@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/primeiro_registro"
+        android:icon="@android:drawable/ic_media_rew"
+        android:title="Primeiro"/>
+
+    <item
+        android:id="@+id/retroceder_registro"
+        android:icon="@android:drawable/ic_media_previous"
+        android:title="Anterior"/>
+
+    <item
+        android:id="@+id/avancar_registro"
+        android:icon="@android:drawable/ic_media_next"
+        android:title="Proximo"/>
+
+    <item
+        android:id="@+id/ultimo_registro"
+        android:icon="@android:drawable/ic_media_ff"
+        android:title="Ultimo"/>
+
+</menu>
