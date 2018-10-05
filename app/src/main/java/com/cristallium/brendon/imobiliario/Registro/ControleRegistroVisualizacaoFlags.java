@@ -1,6 +1,6 @@
 package com.cristallium.brendon.imobiliario.Registro;
 
-public enum ControleRegistroFlags {
+public enum ControleRegistroVisualizacaoFlags {
     ULTIMO_REGISTRO,
     AVANCAR_REGISTRO,
     PRIMEIRO_REGISTRO,

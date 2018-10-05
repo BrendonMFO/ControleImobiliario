@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100"
-    tools:context=".Registro.ControleRegistro">
+    tools:context=".Registro.ControleRegistroVisualizacao">
 
         <ImageButton
             android:id="@+id/btn_primeiro_registro"

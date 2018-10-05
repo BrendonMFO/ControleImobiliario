@@ -1,4 +1,4 @@
-package com.cristallium.brendon.imobiliario;
+package com.cristallium.brendon.imobiliario.Imovel;
 
 public class Imovel {
 
@@ -6,6 +6,10 @@ public class Imovel {
     private String endereco;
     private String informacoes;
     private String proprietario;
+
+    public Imovel() {
+        this("", "", "", 0);
+    }
 
     public Imovel(String endereco, String proprietario, String informacoes, Integer valor) {
         setValues(endereco, proprietario, informacoes, valor);

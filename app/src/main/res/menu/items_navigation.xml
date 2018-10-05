@@ -2,23 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/primeiro_registro"
+        android:id="@+id/cadastrar_registro"
         android:icon="@android:drawable/ic_media_rew"
-        android:title="Primeiro"/>
+        android:title="Cadastrar"/>
 
     <item
-        android:id="@+id/retroceder_registro"
+        android:id="@+id/editar_registro"
         android:icon="@android:drawable/ic_media_previous"
-        android:title="Anterior"/>
+        android:title="Editar"/>
 
     <item
-        android:id="@+id/avancar_registro"
+        android:id="@+id/excluir_registro"
         android:icon="@android:drawable/ic_media_next"
-        android:title="Proximo"/>
-
-    <item
-        android:id="@+id/ultimo_registro"
-        android:icon="@android:drawable/ic_media_ff"
-        android:title="Ultimo"/>
+        android:title="Excluir"/>
 
 </menu>

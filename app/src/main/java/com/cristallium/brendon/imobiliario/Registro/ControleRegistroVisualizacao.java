@@ -12,18 +12,18 @@ import android.support.annotation.Nullable;
 
 import com.cristallium.brendon.imobiliario.R;
 
-public class ControleRegistro extends Fragment {
+public class ControleRegistroVisualizacao extends Fragment {
 
     private ImageButton btnUltimoRegistro;
     private ImageButton btnAvancarRegistro;
     private ImageButton btnPrimeiroRegistro;
     private ImageButton btnRetrocederRegistro;
-    private IControleRegistro iControleRegistro;
+    private ControleRegistroVisualizacaoInterface iControleRegistro;
 
-    public ControleRegistro() {}
+    public ControleRegistroVisualizacao() {}
 
-    public static ControleRegistro newInstance() {
-        ControleRegistro fragment = new ControleRegistro();
+    public static ControleRegistroVisualizacao newInstance() {
+        ControleRegistroVisualizacao fragment = new ControleRegistroVisualizacao();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -33,25 +33,25 @@ public class ControleRegistro extends Fragment {
         btnUltimoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iControleRegistro.onControleRegistro(ControleRegistroFlags.ULTIMO_REGISTRO);
+                iControleRegistro.onControleRegistro(ControleRegistroVisualizacaoFlags.ULTIMO_REGISTRO);
             }
         });
         btnAvancarRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iControleRegistro.onControleRegistro(ControleRegistroFlags.AVANCAR_REGISTRO);
+                iControleRegistro.onControleRegistro(ControleRegistroVisualizacaoFlags.AVANCAR_REGISTRO);
             }
         });
         btnPrimeiroRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iControleRegistro.onControleRegistro(ControleRegistroFlags.PRIMEIRO_REGISTRO);
+                iControleRegistro.onControleRegistro(ControleRegistroVisualizacaoFlags.PRIMEIRO_REGISTRO);
             }
         });
         btnRetrocederRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iControleRegistro.onControleRegistro(ControleRegistroFlags.RETROCEDER_REGISTRO);
+                iControleRegistro.onControleRegistro(ControleRegistroVisualizacaoFlags.RETROCEDER_REGISTRO);
             }
         });
     }
@@ -69,18 +69,18 @@ public class ControleRegistro extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnUltimoRegistro = (ImageButton)getView().findViewById(R.id.btn_ultimo_registro);
-        btnAvancarRegistro = (ImageButton)getView().findViewById(R.id.btn_avancar_registro);
-        btnPrimeiroRegistro = (ImageButton)getView().findViewById(R.id.btn_primeiro_registro);
-        btnRetrocederRegistro = (ImageButton)getView().findViewById(R.id.btn_retroceder_registro);
+        btnUltimoRegistro = getView().findViewById(R.id.btn_ultimo_registro);
+        btnAvancarRegistro = getView().findViewById(R.id.btn_avancar_registro);
+        btnPrimeiroRegistro = getView().findViewById(R.id.btn_primeiro_registro);
+        btnRetrocederRegistro = getView().findViewById(R.id.btn_retroceder_registro);
+        setClickListeners();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof IControleRegistro) {
-            iControleRegistro = (IControleRegistro) context;
-            setClickListeners();
+        if (context instanceof ControleRegistroVisualizacaoInterface) {
+            iControleRegistro = (ControleRegistroVisualizacaoInterface) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
