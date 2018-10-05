@@ -1,6 +1,6 @@
 package com.cristallium.brendon.imobiliario.Registro;
 
-public interface ControleRegistroSalvarInterface {
+public interface ControleRegistroSalvarInterface extends ControleRegistroInterface {
 
     void onControleRegistroSalvar(ControleRegistroSalvarFlags flag);
 

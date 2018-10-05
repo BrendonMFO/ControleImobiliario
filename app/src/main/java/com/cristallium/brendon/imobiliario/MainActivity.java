@@ -13,12 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cristallium.brendon.imobiliario.Imovel.Imovel;
-import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacao;
-import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacaoFlags;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvar;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvarFlags;
-import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacaoInterface;
+import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacao;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvarInterface;
+import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacaoFlags;
+import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacaoInterface;
 
 import java.util.ArrayList;
 
@@ -158,13 +158,6 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
                 !txtProprietario.getText().toString().trim().isEmpty();
     }
 
-    private void addControlFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container_control, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
     private void clearFields() {
         txtId.setText("");
         txtValor.setText("");
@@ -178,6 +171,13 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
         txtEndereco.setEnabled(enable);
         txtInformacoes.setEnabled(enable);
         txtProprietario.setEnabled(enable);
+    }
+
+    private void addControlFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_control, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void setActiveIndex(int index) {
