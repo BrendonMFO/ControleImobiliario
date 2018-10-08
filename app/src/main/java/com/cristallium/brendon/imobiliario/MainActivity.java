@@ -1,16 +1,16 @@
 package com.cristallium.brendon.imobiliario;
 
-import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.widget.Toast;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.view.MenuInflater;
+import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentTransaction;
 
 import com.cristallium.brendon.imobiliario.Imovel.Imovel;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvar;
@@ -25,9 +25,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements ControleRegistroVisualizacaoInterface, ControleRegistroSalvarInterface {
 
     private enum TIPO {
-        VISUALIZAR_IMOVEL,
+        EDITAR_IMOVEL,
         CADASTRAR_IMOVEL,
-        EDITAR_IMOVEL
+        VISUALIZAR_IMOVEL,
     }
 
     private TIPO tipo;
@@ -128,7 +128,11 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
             addControlFragment(ControleRegistroSalvar.newInstance());
             tipo = TIPO.EDITAR_IMOVEL;
         } else {
-            showMessage("Nenhum Imovel cadastrado");
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Nenhum Imovel cadastrado",
+                    Toast.LENGTH_LONG
+            ).show();
         }
     }
 
@@ -147,7 +151,11 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
                     }
             );
         } else {
-            showMessage("Nenhum Imovel para excluir.");
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Nenhum Imovel para excluir.",
+                    Toast.LENGTH_LONG
+            ).show();
         }
     }
 
@@ -218,10 +226,6 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
                 txtInformacoes.getText().toString(),
                 Integer.parseInt(txtValor.getText().toString())
         );
-    }
-
-    private void showMessage(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
     private void showDialog(String title, String Message, DialogInterface.OnClickListener listener) {

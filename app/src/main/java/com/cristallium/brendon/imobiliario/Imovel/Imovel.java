@@ -1,6 +1,8 @@
 package com.cristallium.brendon.imobiliario.Imovel;
 
-public class Imovel {
+import java.io.Serializable;
+
+public class Imovel implements Serializable {
 
     private Integer valor;
     private String endereco;
