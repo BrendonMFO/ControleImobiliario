@@ -1,20 +1,42 @@
 package com.cristallium.brendon.imobiliario.Imovel;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class Imovel implements Serializable {
+public class Imovel implements Parcelable {
 
     private Integer valor;
     private String endereco;
     private String informacoes;
     private String proprietario;
 
-    public Imovel() {
-        this("", "", "", 0);
+    public static final Parcelable.Creator<Imovel> CREATOR = new Parcelable.Creator<Imovel>() {
+        @NonNull
+        public Imovel createFromParcel(Parcel in) {
+            return new Imovel(in);
+        }
+
+        @NonNull
+        @org.jetbrains.annotations.Contract(pure = true)
+        public Imovel[] newArray(int size) {
+            return new Imovel[size];
+        }
+    };
+
+    private Imovel(Parcel from) {
+        valor = from.readInt();
+        endereco = from.readString();
+        informacoes = from.readString();
+        proprietario = from.readString();
     }
 
-    public Imovel(String endereco, String proprietario, String informacoes, Integer valor) {
+    private Imovel(String endereco, String proprietario, String informacoes, Integer valor) {
         setValues(endereco, proprietario, informacoes, valor);
+    }
+
+    public Imovel() {
+        this("", "", "", 0);
     }
 
     public void setValues(String endereco, String proprietario, String informacoes, Integer valor) {
@@ -40,4 +62,16 @@ public class Imovel implements Serializable {
         return proprietario;
     }
 
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(valor);
+        dest.writeString(endereco);
+        dest.writeString(informacoes);
+        dest.writeString(proprietario);
+    }
 }

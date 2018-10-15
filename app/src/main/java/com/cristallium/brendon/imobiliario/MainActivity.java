@@ -1,5 +1,6 @@
 package com.cristallium.brendon.imobiliario;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.listar_registro:
+                listarImoveis();
+                return true;
             case R.id.cadastrar_registro:
                 createMode();
                 return true;
@@ -113,6 +117,12 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void listarImoveis() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        intent.putParcelableArrayListExtra("Imoveis", imoveis);
+        startActivity(intent);
     }
 
     private void createMode() {

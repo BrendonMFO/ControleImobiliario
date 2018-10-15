@@ -29,7 +29,9 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ImovelHolder myViewHolder, int i) {
-
+        myViewHolder.endereco.setText(imoveis.get(i).getEndereco());
+        myViewHolder.informacoes.setText(imoveis.get(i).getInformacoes());
+        myViewHolder.valor.setText(String.format("%s", imoveis.get(i).getValor()));
     }
 
     @Override
