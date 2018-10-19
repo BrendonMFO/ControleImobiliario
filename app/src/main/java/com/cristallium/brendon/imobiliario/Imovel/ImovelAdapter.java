@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ImovelAdapter extends RecyclerView.Adapter<ImovelHolder> {
 
-    private final ArrayList<Imovel> imoveis;
+    private ArrayList<Imovel> imoveis;
 
     public ImovelAdapter(ArrayList<Imovel> imoveis) {
         this.imoveis = imoveis;
@@ -37,6 +37,11 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelHolder> {
     @Override
     public int getItemCount() {
         return imoveis.size();
+    }
+
+    public void swapData(ArrayList<Imovel> imoveis) {
+        this.imoveis = imoveis;
+        this.notifyDataSetChanged();
     }
 
 }

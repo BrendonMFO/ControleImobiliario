@@ -18,7 +18,6 @@ public class Imovel implements Parcelable {
         }
 
         @NonNull
-        @org.jetbrains.annotations.Contract(pure = true)
         public Imovel[] newArray(int size) {
             return new Imovel[size];
         }
