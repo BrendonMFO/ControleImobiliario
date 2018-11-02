@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.cristallium.brendon.imobiliario.Imovel.Imovel;
+import com.cristallium.brendon.imobiliario.Imovel.ImovelDatabaseHelper;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvar;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroSalvarFlags;
 import com.cristallium.brendon.imobiliario.Registro.ControleRegistroVisualizacao;
@@ -39,13 +40,15 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
     private EditText txtInformacoes;
     private EditText txtProprietario;
     private ArrayList<Imovel> imoveis;
+    private ImovelDatabaseHelper imovelDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activeIndex = 0;
-        imoveis = new ArrayList<>();
+        imovelDatabase = new ImovelDatabaseHelper(this);
+        imoveis = imovelDatabase.getAllImoveis();
         tipo = TIPO.VISUALIZAR_IMOVEL;
         txtId = findViewById(R.id.txtId);
         txtValor = findViewById(R.id.txt_valor);
@@ -223,13 +226,16 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
     }
 
     private void addImovel() {
-        imoveis.add(new Imovel());
+        Imovel novoImovel = new Imovel();
+        imoveis.add(novoImovel);
+        imovelDatabase.addImovel(novoImovel);
         activeIndex = imoveis.size() - 1;
         setImovelValues();
     }
 
     private void setImovelValues() {
         Imovel imovel = imoveis.get(activeIndex);
+        imovelDatabase.editImovel(activeIndex, imovel);
         imovel.setValues(
                 txtEndereco.getText().toString(),
                 txtProprietario.getText().toString(),

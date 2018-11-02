@@ -12,29 +12,28 @@ import android.widget.EditText;
 
 import com.cristallium.brendon.imobiliario.Imovel.Imovel;
 import com.cristallium.brendon.imobiliario.Imovel.ImovelAdapter;
+import com.cristallium.brendon.imobiliario.Imovel.ImovelDatabaseHelper;
 
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private EditText precoMaximo;
     private ImovelAdapter mAdapter;
     private ArrayList<Imovel> imoveis;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        imoveis = getIntent().getParcelableArrayListExtra("Imoveis");
-        mRecyclerView = findViewById(R.id.imoveisRecyclerView);
-        mLayoutManager = new LinearLayoutManager(this);
+        ImovelDatabaseHelper imovelDatabase = new ImovelDatabaseHelper(this);
+        imoveis = imovelDatabase.getAllImoveis();
+        RecyclerView mRecyclerView = findViewById(R.id.imoveisRecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new ImovelAdapter(imoveis);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        precoMaximo = (EditText)findViewById(R.id.txtPrecoMaximo);
+        EditText precoMaximo = (EditText) findViewById(R.id.txtPrecoMaximo);
         precoMaximo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
