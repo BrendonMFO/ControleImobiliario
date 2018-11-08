@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class ImovelDatabaseHelper extends SQLiteOpenHelper {
 
-    private final static String TABLE_NAME = "Imovel";
     private final static String COL1 = "id_imovel";
     private final static String COL2 = "valor_imovel";
     private final static String COL3 = "endereco_imovel";
     private final static String COL4 = "informacao_imovel";
     private final static String COL5 = "proprietario_imovel";
+    private final static String TABLE_NAME = "ImovelDatabase";
 
     public ImovelDatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -35,25 +35,44 @@ public class ImovelDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addImovel(Imovel imovel) {
+    public long addImovel(Imovel imovel) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.insert(TABLE_NAME, null, createContent(imovel)) != -1;
+        long insert = db.insert(TABLE_NAME, null, createContent(imovel));
+        db.close();
+        return insert;
     }
 
-    public boolean editImovel(Integer id, Imovel imovel) {
+    public void editImovel(Imovel imovel) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.update(TABLE_NAME, createContent(imovel), "id_imovel = " + id, null) != -1;
+        db.update(TABLE_NAME, createContent(imovel), "id_imovel = ?", new String[]{imovel.getId().toString()});
+        db.close();
+    }
+
+    public void removeImovel(Integer id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, "id_imovel = ?", new String[]{id.toString()});
+        db.close();
     }
 
     public ArrayList<Imovel> getAllImoveis() {
         ArrayList<Imovel> imoveis =  new ArrayList<Imovel>();
         SQLiteDatabase db = getWritableDatabase();
-        Cursor data = db.rawQuery(String.format("SELECT * FROM %s", TABLE_NAME), null);
-        while (data.moveToNext()) {
-            Imovel imovel = new Imovel();
-            imovel.setValues(data.getString(2), data.getString(4), data.getString(3), data.getInt(1));
-            imoveis.add(imovel);
+        Cursor cursor = db.rawQuery(String.format("SELECT * FROM %s", TABLE_NAME), null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Imovel imovel = new Imovel();
+                imovel.setValues(
+                        cursor.getString(cursor.getColumnIndex(COL3)),
+                        cursor.getString(cursor.getColumnIndex(COL5)),
+                        cursor.getString(cursor.getColumnIndex(COL4)),
+                        cursor.getInt(cursor.getColumnIndex(COL2))
+                );
+                imovel.setId(cursor.getColumnIndex(COL1));
+                imoveis.add(imovel);
+                cursor.moveToNext();
+            }
         }
+        db.close();
         return imoveis;
     }
 

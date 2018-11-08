@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
         txtInformacoes = findViewById(R.id.txt_informacoes);
         txtProprietario = findViewById(R.id.txt_proprietario);
         addControlFragment(ControleRegistroVisualizacao.newInstance());
+        setActiveIndex(0);
     }
 
     @Override
@@ -158,7 +159,8 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             clearFields();
-                            imoveis.remove(activeIndex.intValue());
+                            Imovel imovel = imoveis.remove(activeIndex.intValue());
+                            imovelDatabase.removeImovel(imovel.getId());
                             setActiveIndex(0);
                         }
                     }
@@ -216,32 +218,35 @@ public class MainActivity extends AppCompatActivity implements ControleRegistroV
         if (verifyFields()) {
             switch (tipo) {
                 case CADASTRAR_IMOVEL:
-                    addImovel();
+                    Imovel imovelSave = addImovel();
+                    final long id = imovelDatabase.addImovel(imovelSave);
+                    imovelSave.setId((int) id);
                     break;
                 case EDITAR_IMOVEL:
-                    setImovelValues();
+                    Imovel imovelEdit = setImovelValues();
+                    imovelDatabase.editImovel(imovelEdit);
                     break;
             }
         }
     }
 
-    private void addImovel() {
+    private Imovel addImovel() {
         Imovel novoImovel = new Imovel();
         imoveis.add(novoImovel);
-        imovelDatabase.addImovel(novoImovel);
         activeIndex = imoveis.size() - 1;
         setImovelValues();
+        return novoImovel;
     }
 
-    private void setImovelValues() {
+    private Imovel setImovelValues() {
         Imovel imovel = imoveis.get(activeIndex);
-        imovelDatabase.editImovel(activeIndex, imovel);
         imovel.setValues(
                 txtEndereco.getText().toString(),
                 txtProprietario.getText().toString(),
                 txtInformacoes.getText().toString(),
                 Integer.parseInt(txtValor.getText().toString())
         );
+        return imovel;
     }
 
     private void showDialog(String title, String Message, DialogInterface.OnClickListener listener) {

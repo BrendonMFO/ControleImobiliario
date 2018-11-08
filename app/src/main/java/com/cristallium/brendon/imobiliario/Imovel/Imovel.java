@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 public class Imovel implements Parcelable {
 
+    private Integer id;
     private Integer valor;
     private String endereco;
     private String informacoes;
@@ -31,7 +32,7 @@ public class Imovel implements Parcelable {
     }
 
     private Imovel(String endereco, String proprietario, String informacoes, Integer valor) {
-        setValues(endereco, proprietario, informacoes, valor);
+        setValues( endereco, proprietario, informacoes, valor);
     }
 
     public Imovel() {
@@ -43,6 +44,14 @@ public class Imovel implements Parcelable {
         this.endereco = endereco;
         this.informacoes = informacoes;
         this.proprietario = proprietario;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public Integer getValor() {
